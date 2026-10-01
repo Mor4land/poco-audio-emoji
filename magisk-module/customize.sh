@@ -15,7 +15,7 @@ if [ -f "$MODPATH/MirageAudioEmoji.apk" ]; then
 fi
 
 ui_print "- Применение флагов Phenotype для Google Телефон..."
-for db in /data/data/com.google.android.dialer/databases/phenotype.db /data/data/com.google.android.gms/databases/phenotype.db; do
+for db in /data/data/com.google.android.dialer/databases/phenotype.db; do
     if [ -f "$db" ]; then
         which sqlite3 >/dev/null 2>&1 && sqlite3 "$db" "INSERT OR REPLACE INTO Flags (packageName, version, flagType, name, boolVal, committed) VALUES ('com.google.android.dialer#com.google.android.dialer', 0, 1, 'AudioEmoji__enable_audio_emoji', 1, 1);" 2>/dev/null
         which sqlite3 >/dev/null 2>&1 && sqlite3 "$db" "INSERT OR REPLACE INTO Flags (packageName, version, flagType, name, boolVal, committed) VALUES ('com.google.android.dialer#com.google.android.dialer', 0, 1, 'AudioEmoji__audio_emoji_show_in_call_ui', 1, 1);" 2>/dev/null
@@ -23,5 +23,5 @@ for db in /data/data/com.google.android.dialer/databases/phenotype.db /data/data
 done
 
 ui_print "- Готово! Включите модуль в приложении LSPosed"
-ui_print "  (область: Google Телефон и Google Play Services)."
+ui_print "  (область: только «Телефон» / Google Dialer, GMS трогать не нужно)."
 ui_print "*********************************************"
